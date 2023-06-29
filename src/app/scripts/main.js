@@ -5,6 +5,8 @@ import { formLogin, inputSearch, login, shop } from './UI/domElements.js'
 import { handleSubmit, loginView } from './UI/loginView.js'
 import { shopReturn } from './UI/shopReturn.js'
 import { verifySession } from './UI/shop.js'
+import { chengePag, showAdmiBtn, llamar } from './UI/admin.js'
+
 const currentView = localStorage.getItem('currentView')
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,4 +32,7 @@ printCategories()
 printProducts()
 shopReturn()
 verifySession()
+showAdmiBtn()
 inputSearch.addEventListener('keyup', printProductsFinder)
+chengePag()
+llamar() 

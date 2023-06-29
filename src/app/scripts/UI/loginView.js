@@ -30,5 +30,6 @@ const validateUser = async () => {
         showShop()
         verifySession()
         formLogin.reset()
+        location.reload()
     }
 }

@@ -22,11 +22,12 @@
             <input class="header__search-input" type="text" placeholder="Buscar producto">
         </div>
         <nav class="header__nav">
+            <p class="admiBtn hidden">Administrador</p>
             <p class="loginBtn">Iniciar Sesión</p>
         </nav>
     </header>
     <h3 id="title" class="hidden">Bienvenido/a <span></span></h3>
-    <main class="main">
+    <main class="main__page">
         <aside class="main__categories">
             <h2>Categorias</h2>
             <ul class="main__categories__list" id="listCategories">
@@ -36,6 +37,52 @@
             
         </article>
     </main>
+
+    <main class="main__admi  hidden">
+        <form id="formNewProduct">
+            <h2 class="subtitle">Nuevo Producto</h2>
+            <div class="form__group">
+              <label for="name" class="form__label">Nombre del producto</label>
+              <input type="text" id="name" class="form__input" placeholder="Introduzca el nombre">
+            </div>
+            <div class="form__group">
+              <label for="price" class="form__label">Precio del producto</label>
+              <input type="number" id="price" class="form__input" placeholder="Introduzca el precio">
+            </div>
+            <div class="form__group">
+              <label for="quantity" class="form__label">Cantidad actual</label>
+              <input type="number" id="quantity" class="form__input" placeholder="Introduzca la cantidad">
+            </div>
+
+            <div class="form__group">
+                <label for="category" class="form__label">Categoria del producto</label>
+                <input type="number" id="category" class="form__input" placeholder="Introduzca la categoria">
+            </div>
+
+            <div class="form__group">
+                <label for="imagen" class="form__label">Imagen del producto</label>
+                <input type="url" id="imagen" class="form__input" placeholder="Introduzca la url Imagen">
+            </div>
+
+            
+            <button type="submit" class="form__btn">Guardar</button>
+          </form>
+          <div class="divider"></div>
+          <table cellspacing="0" cellpadding="0" id="tableProducts">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tBodyProducts">
+            </tbody>
+          </table>
+    </main>
+
     </div>
     <div class="login">
         <div class="login__return">

@@ -1,13 +1,13 @@
 
 export const saveUser = (user) => {
-    sessionStorage.setItem('currentUser', JSON.stringify(user))
+    localStorage.setItem('currentUser', JSON.stringify(user))
 }
 
 export const checkUser = () => {
-    const userExists = JSON.parse(sessionStorage.getItem('currentUser'))||{};
+    const userExists = JSON.parse(localStorage.getItem('currentUser'))||{};
     return userExists;
 }
 
 export const clearSession = () => {
-    sessionStorage.clear();
+    localStorage.clear();
 }
