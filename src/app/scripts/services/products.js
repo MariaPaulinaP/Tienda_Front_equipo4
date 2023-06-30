@@ -12,6 +12,17 @@ export const getProducts = async () => {
     }
 }
 
+export const getAdmi = async () => {
+    try {
+        const {data, status} = await axios.get(endpoints.urlAdmi)
+        if (status === 200) {
+            return data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const findProducts = async(keyWord) => {
     try {
         const {data, status} = await axios.get(`${endpoints.urlProducts}&name_like=${keyWord}`);

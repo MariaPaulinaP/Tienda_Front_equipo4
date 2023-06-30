@@ -1,8 +1,10 @@
 import { checkUser, clearSession } from "../services/session"
 import { admiBtn, mainPage, mainAdmi, tBodyProducts } from "./domElements"
 import { showLogin } from "./loginView"
-import { getProducts } from "../services/products"
+import { getAdmi } from "../services/products"
 import { URL_API} from "../services/data"
+import axios from "axios"
+
 
 const inputName = document.querySelector('#name')
 const inputPrice = document.querySelector('#price')
@@ -43,7 +45,7 @@ export const showAdmiBtn = () => {
 }
 
 const printAdmi = async () => {
-  const traerProductsAdmi = await getProducts(); 
+  const traerProductsAdmi = await getAdmi(); 
   tBodyProducts.innerHTML ="";  
  traerProductsAdmi.forEach(product => {
         tBodyProducts.innerHTML += `
@@ -54,8 +56,8 @@ const printAdmi = async () => {
                 <td>${product.categoryId}</td>
     
                 <td>
-                    <span class="edit">✏️</span>
-                    <span class="delete">❌</span>
+                    <span class="edit" data-id="${product.id}">✏️</span>
+                    <span class="delete" data-id="${product.id}">❌</span>
                 </td>
             </tr>
             `
@@ -74,11 +76,11 @@ const printAdmi = async () => {
 
 
 const handleSubmit = async () => {
-
-    if (!inputName.value || !inputPrice.value || !inputAmount.value || !inputCategory.value || !inputImagen.value) {
-        alert('hay campos obligatorios por llenar')
-        return
-    }
+    
+    // if (!inputName.value || !inputPrice.value || !inputAmount.value || !inputCategory.value || !inputImagen.value) {
+    //     alert('hay campos obligatorios por llenar')
+    //     return
+    // }
 
     const newProduct = {
         name: inputName.value,
@@ -89,24 +91,25 @@ const handleSubmit = async () => {
     }
     
     if (isEdit) {
-        const response = await updateProduct(newProduct);
         if(response.status == 200) {
             alert('Producto actualizado exitosamente')
+            formNewProduct.reset()
         } else {
             alert('Hubo un error al guardar producto') 
-        }
+        } const response = await updateProduct(newProduct);
+       
     }else {
+        
         const response = await saveProduct(newProduct);
         if(response.status == 201) {
             alert('Producto guardado exitosamente')
+            formNewProduct.reset()
         } else {
             alert('Hubo un error al guardar producto') 
         }
     }
 
-    formNewProduct.reset()
-
-    getProducts()
+    getAdmi()
 }
 
 const updateProduct = async (product) => {
@@ -152,7 +155,7 @@ const handleDelete = async (id) => {
         alert('Hubo un error al eliminar productos')
     }
 
-    getProducts()
+    getAdmi()
 }
 
 const handleEdit = async (id) => {
@@ -160,14 +163,16 @@ const handleEdit = async (id) => {
     idProductEdit = id;
     
     //Get the product info
-    const resp = getProducts();
+    const resp = await getAdmi();
+    
     const product = resp[id-1];
+    
 
     //Fill the form with the product
     inputName.value = product.name;
     inputAmount.value = product.amount;
     inputPrice.value = product.price;
-    inputCategory.value = product.category;
+    inputCategory.value = product.categoryId;
     inputImagen.value = product.imagen;
 
     titleForm.innerHTML = 'Actualizar producto';
@@ -181,7 +186,9 @@ const getElementsTable = () => {
 
     iconDelete.forEach((element) => {
         const id = element.getAttribute('data-id');
+        
         element.addEventListener('click', () => {
+            console.log(id)
             handleDelete(id)
         })
     })

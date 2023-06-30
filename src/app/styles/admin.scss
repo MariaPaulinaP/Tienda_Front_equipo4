@@ -24,6 +24,10 @@
   color: var(--color-white);
 }
 
+.edit , .delete{
+  cursor: pointer;
+}
+
 .nav__item {
   cursor: pointer;
   text-decoration: underline;

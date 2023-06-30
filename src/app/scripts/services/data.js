@@ -5,5 +5,5 @@ export const endpoints = {
     urlProducts: `${URL_API}products?_expand=category`,
     urlCategories: `${URL_API}categories`,
     urlUsers: `${URL_API}users`,
-    urlAdmi: `${URL_API}products`
+    urlAdmi: `${URL_API}products/`
 }
